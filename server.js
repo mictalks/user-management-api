@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 const app = express()
 app.use(express.json())
 
-// criar um usuário
+// criar usuário
 app.post('/usuarios', async (req, res) => {
 
     await prisma.user.create({
@@ -21,11 +21,11 @@ app.post('/usuarios', async (req, res) => {
     res.status(201).json(req.body)
 })
 
-// listar todos os usuários
+// listar todos usuários
 app.get('/usuarios', async (req, res) => {
 
     let users = []
-    if(req.query){
+    if (req.query) {
         users = await prisma.user.findMany({
             where: {
                 name: req.query.name,
@@ -33,11 +33,9 @@ app.get('/usuarios', async (req, res) => {
                 age: req.query.age
             }
         })
-    } else{
+    } else {
         users = await prisma.user.findMany()
     }
-
-    
 
     res.status(200).json(users)
 })
@@ -61,6 +59,7 @@ app.put('/usuarios/:id', async (req, res) => {
     res.status(201).json(req.body)
 })
 
+// deletar usuário
 app.delete('/usuarios/:id', async (req, res) => {
     await prisma.user.delete({
         where: {
@@ -72,9 +71,3 @@ app.delete('/usuarios/:id', async (req, res) => {
 })
 
 app.listen(3000)
-
-// - editar um usuário
-// - deletar um usuário
-
-// precisamos de duas coisas: o tipo de rota / método http
-// endereço da rota (www.lojadoseuze.com/produtos)
