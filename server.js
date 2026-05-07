@@ -1,11 +1,13 @@
 // objetivo: criar API de usuários
 import express from 'express'
+import cors from 'cors'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 // criar usuário
 app.post('/usuarios', async (req, res) => {
